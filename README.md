@@ -1,0 +1,3 @@
+# RxJava2Retrofit
+实战项目关于Rxjava2和Retrofit的使用
+封装以后，一行代码使用Rxjava2和Retrofit请求网络
