@@ -12,14 +12,25 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
-        init(savedInstanceState);
+        initData(savedInstanceState);
+        initView();
     }
+
+    protected abstract void initView();
+
     protected void showToast(String msg) {
         ToastUtils.show(msg);
     }
 
-    protected abstract @LayoutRes
-    int getLayoutId();
+    /**
+     * 布局
+     * @return
+     */
+    protected abstract int getLayoutId();
 
-    protected abstract void init(Bundle savedInstanceState);
+    /**
+     * 初始化数据
+     * @param savedInstanceState
+     */
+    protected abstract void initData(Bundle savedInstanceState);
 }

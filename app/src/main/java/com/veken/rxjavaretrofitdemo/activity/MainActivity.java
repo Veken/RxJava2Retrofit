@@ -4,16 +4,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.veken.rxjavaretrofitdemo.R;
 import com.veken.rxjavaretrofitdemo.module.bean.LoginRespond;
 import com.veken.rxjavaretrofitdemo.net.bean.UserInfoBean;
-import com.veken.rxjavaretrofitdemo.net.present.UserInfoPresent;
+import com.veken.rxjavaretrofitdemo.net.request.UserInfoRequest;
 
 
 public class MainActivity extends BaseActivity implements UserInfoBean {
     private Button btn;
-    private UserInfoPresent userInfoPresent;
+    private UserInfoRequest userInfoRequest;
+    private TextView tv;
 
     @Override
     protected int getLayoutId() {
@@ -27,7 +29,8 @@ public class MainActivity extends BaseActivity implements UserInfoBean {
 
     private void initView() {
         btn = (Button) findViewById(R.id.btn);
-        userInfoPresent = new UserInfoPresent(this,this);
+        tv = (TextView) findViewById(R.id.tv);
+        userInfoRequest= new UserInfoRequest(this,this);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,45 +42,29 @@ public class MainActivity extends BaseActivity implements UserInfoBean {
 
 
     public void getData() {
-//        HashMap<String, Object> fieldsMap = new HashMap<>();
-//        fieldsMap.put("phoneNo", "13111112222");
-//        fieldsMap.put("password", "xingfu13");
-//        handleFields(fieldsMap);
-//        fieldsMap.put("method", "user.login");
-//        RetrofitConnect.getApiService()
-//                .login(fieldsMap)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Consumer<LoginRespond>() {
-//                    @Override
-//                    public void accept(@NonNull LoginRespond loginOrRegisterRespond) throws Exception {
-//                        showToast(loginOrRegisterRespond.getData().toString());
-//                    }
-//                }, new Consumer<Throwable>() {
-//                    @Override
-//                    public void accept(@NonNull Throwable throwable) throws Exception {
-//
-//                    }
-//                });
-        userInfoPresent.login();
+        userInfoRequest.login();
     }
+
+
 
     //传递的用户
     @Override
     public String getPhoneNum() {
-        return "你的用户名";
+        return "登录账号";
     }
 
     //传递的密码
     @Override
     public String getPwd() {
-        return "你的密码";
+        return "登录密码";
     }
 
+    //数据返回
     @Override
     public void onSuccess(Object object) {
-        LoginRespond loginRespond = (LoginRespond)object;
+        LoginRespond loginRespond = (LoginRespond) object;
         Log.d("登录信息:", loginRespond.getResDesc());
+        tv.setText(loginRespond.getData().getTelphone());
     }
 
     @Override

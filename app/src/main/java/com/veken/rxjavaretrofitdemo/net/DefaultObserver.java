@@ -102,6 +102,7 @@ public abstract class DefaultObserver<T extends BaseRespond> implements Observer
      */
     abstract public void onSuccess(T response);
 
+
     /**
      * 服务器返回数据，但响应码不为200
      *
