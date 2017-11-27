@@ -39,7 +39,6 @@ public class RetrofitConnect {
      */
     public static String BASE_URL = "";
 
-
     private RetrofitConnect() {
        /* HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);*/

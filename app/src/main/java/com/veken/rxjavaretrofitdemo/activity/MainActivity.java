@@ -23,11 +23,11 @@ public class MainActivity extends BaseActivity implements UserInfoBean {
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        initView();
+    protected void initData(Bundle savedInstanceState) {
     }
 
-    private void initView() {
+    @Override
+    protected void initView() {
         btn = (Button) findViewById(R.id.btn);
         tv = (TextView) findViewById(R.id.tv);
         userInfoRequest= new UserInfoRequest(this,this);
@@ -35,27 +35,22 @@ public class MainActivity extends BaseActivity implements UserInfoBean {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getData();
+                userInfoRequest.login();
             }
         });
     }
 
-
-    public void getData() {
-        userInfoRequest.login();
-    }
-
-
-
     //传递的用户
     @Override
     public String getPhoneNum() {
+        //根据需要，传递相应的数据
         return "登录账号";
     }
 
     //传递的密码
     @Override
     public String getPwd() {
+        //根据需要，传递相应的数据
         return "登录密码";
     }
 
